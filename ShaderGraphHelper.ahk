@@ -45,7 +45,7 @@ Return
             MouseGetPos, perPosX, perPosY
             Send, {MButton Down}
             KeyWait, RButton ,
-            HookRightMouse(perPosX,perPosY,preTime) 
+            HookRightMouse(perPosX,perPosY) 
         }
         Else
         {
@@ -57,7 +57,7 @@ Return
 
 #IfWinActive
 
-HookRightMouse(perPosX,perPosY,preTime)
+HookRightMouse(perPosX,perPosY)
 {
     ; 获得鼠标当前坐标
     MouseGetPos, curPosX, curPosY
