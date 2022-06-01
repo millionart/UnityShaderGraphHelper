@@ -24,9 +24,11 @@ Menu, tray, add, 更新 | Ver %ver%, UpdateScrit
 If A_IsCompiled=1
 {
     Menu, tray, add, 退出 | Exit, ExitScrit
+}
+else
+{
     Menu, Tray, Icon,%A_scriptdir%\tray.ico,, 1
 }
-
 return
 
 UpdateScrit:
