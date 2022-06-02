@@ -37,25 +37,38 @@ Return
 
 #IfWinActive, ahk_class UnityContainerWndClass
 
-    $RButton::
-        if WinExist("A")
-            ControlGetFocus, curCtrl
+; Block GraphView stupid Shourtcuts
+$a::BlockSend("a")
+Return
+$s::BlockSend("s")
+Return
+$f::BlockSend("f")
+Return
 
-        ControlGetText, ctrlTxt, %curCtrl%
-        if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
-        {
-            MouseGetPos, perPosX, perPosY
-            Send, {MButton Down}
-            KeyWait, RButton ,
-            HookRightMouse(perPosX,perPosY) 
-        }
-        Else
-        {
-            Send, {RButton Down}
-            KeyWait, RButton
-            Send, {RButton Up}
-        }
-    Return
+$RButton::
+    if WinExist("A")
+        ControlGetFocus, curCtrl
+
+    ControlGetText, ctrlTxt, %curCtrl%
+    if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
+    {
+        MouseGetPos, perPosX, perPosY
+        Send, {MButton Down}
+        KeyWait, RButton ,
+        HookRightMouse(perPosX,perPosY) 
+    }
+    Else
+    {
+        Send, {RButton Down}
+        KeyWait, RButton
+        Send, {RButton Up}
+    }
+Return
+
+; https://github.com/Cyanilux/ShaderGraphVariables
+; L & LButton::
+;     WinMenuSelectItem, A,, Tools, SGVariables, ExtraFeatures, Commands, Add Node 4
+; Return
 
 #IfWinActive
 
@@ -80,7 +93,18 @@ HookRightMouse(perPosX,perPosY)
     }
 }
 
+BlockSend(key)
+{
+    If (A_Cursor=="IBeam")
+    {
+        SendInput, %key%
+    }
+    else
+    {
+        Return
+    }
+}
+
 ExitScrit:
-^#p::
 ExitApp
 Return
