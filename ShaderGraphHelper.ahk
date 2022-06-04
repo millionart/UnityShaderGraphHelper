@@ -37,15 +37,18 @@ Return
 
 #IfWinActive, ahk_class UnityContainerWndClass
 
-; Block GraphView stupid Shourtcuts
-$a::BlockSend("a")
+    ; Block GraphView stupid Shourtcuts
+
+    $a::BlockSend("a")
 Return
+
 $s::BlockSend("s")
 Return
+
 $f::BlockSend("f")
 Return
 
-$RButton::
+RButton::
     if WinExist("A")
         ControlGetFocus, curCtrl
 
@@ -95,13 +98,24 @@ HookRightMouse(perPosX,perPosY)
 
 BlockSend(key)
 {
-    If (A_Cursor=="IBeam")
+    if WinExist("A")
+        ControlGetFocus, curCtrl
+
+    ControlGetText, ctrlTxt, %curCtrl%
+    if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
     {
-        SendInput, %key%
+        If (A_Cursor!="IBeam")
+        {
+            Return
+        }
+        else
+        {
+            SendInput, %key%
+        }
     }
     else
     {
-        Return
+        SendInput, %key%
     }
 }
 
