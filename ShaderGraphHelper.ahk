@@ -115,7 +115,9 @@ BlockSend(key)
     }
     else
     {
-        SendInput, %key%
+        Send, {%key% Down}
+        KeyWait, %key%
+        Send, {%key% Up}
     }
 }
 
