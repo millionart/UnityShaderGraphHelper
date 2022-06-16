@@ -42,7 +42,7 @@ Return
     $a::BlockSend("a")
 Return
 
-$s::BlockSend("s")
+$o::BlockSend("o")
 Return
 
 $f::BlockSend("f")
