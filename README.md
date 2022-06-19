@@ -20,6 +20,7 @@
 ### Known Issues :
 
 - The A, O and F keys can only be inputted when the mouse icon is I Beam.
+- Ctrl 0 1 and 2 will not work.
 
 ## Shortcut Keys：
 
