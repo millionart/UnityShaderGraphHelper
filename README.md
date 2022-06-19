@@ -9,11 +9,13 @@
 
 ## Usage
 
-[Download](https://github.com/millionart/UnityShaderGraphHelper/releases) and unpack zip.
+1. [Download](https://github.com/millionart/UnityShaderGraphHelper/releases) and unpack zip.
 
-Open Shader Graph.
+2. run Unity.
 
-run ShaderGraphHelper.exe
+3. run ShaderGraphHelper.exe
+
+4. Key + L Button to create node.
 
 ### Known Issues :
 
