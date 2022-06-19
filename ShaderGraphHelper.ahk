@@ -69,6 +69,28 @@ RButton::
     }
 Return
 
+$!LButton::
+    if WinExist("A")
+        ControlGetFocus, curCtrl
+    ControlGetText, ctrlTxt, %curCtrl%
+    if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
+    {
+        MouseGetPos, perPosX, perPosY
+        Send, {LButton Down}
+        MouseMove, perPosX, perPosY+10,0
+        MouseMove, perPosX, perPosY,0
+        Send, {LButton Up}
+        Sleep, 80
+        Send, {Escape}
+    }
+    Else
+    {
+        Send, !{LButton Down}
+        KeyWait, LButton
+        Send, !{LButton Up}
+    }
+Return
+
 0 & LButton::CreateNode("Integer")
 Return
 
@@ -194,18 +216,24 @@ Return
 
 CreateNode(nodeName)
 {
-    global nodesPath
-    clipSaved:=ClipBoardAll
-    FileRead, nodeclip, %nodesPath%\%nodeName%.txt
-    Clipboard:=nodeclip
-    ClipWait 0.2, 1
-    ; WinMenuSelectItem is lag, don't use it
-    ;;;;; WinMenuSelectItem, A,, Edit, Paste
-    Send, {CtrlDown}v
-    Sleep, 10
-    Send, {CtrlUp}
-    Sleep, 10
-    Clipboard:=clipSaved
-    ClipWait 0.1, 1
-    ; MsgBox, %nodesPath% | %fileName% | %nodeclip%
+    if WinExist("A")
+        ControlGetFocus, curCtrl
+    ControlGetText, ctrlTxt, %curCtrl%
+    if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
+    {
+        global nodesPath
+        clipSaved:=ClipBoardAll
+        FileRead, nodeclip, %nodesPath%\%nodeName%.txt
+        Clipboard:=nodeclip
+        ClipWait 0.2, 1
+        ; WinMenuSelectItem is lag, don't use it
+        ;;;;; WinMenuSelectItem, A,, Edit, Paste
+        Send, {CtrlDown}v
+        Sleep, 10
+        Send, {CtrlUp}
+        Sleep, 10
+        Clipboard:=clipSaved
+        ClipWait 0.1, 1
+        ; MsgBox, %nodesPath% | %fileName% | %nodeclip%
+    }
 }
