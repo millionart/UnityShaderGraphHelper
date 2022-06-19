@@ -69,75 +69,75 @@ RButton::
     }
 Return
 
-0 & LButton::CreateNode("Integer")
+~0 & LButton::CreateNode("Integer")
 Return
 
-1 & LButton::CreateNode("Float")
+~1 & LButton::CreateNode("Float")
 Return
 
-2 & LButton::CreateNode("Vector2")
+~2 & LButton::CreateNode("Vector2")
 Return
 
-3 & LButton::CreateNode("Vector3")
+~3 & LButton::CreateNode("Vector3")
 Return
 
-4 & LButton::CreateNode("Vector4")
+~4 & LButton::CreateNode("Vector4")
 Return
 
-5 & LButton::CreateNode("Color")
+~5 & LButton::CreateNode("Color")
 Return
 
-B & LButton::CreateNode("Split")
+~B & LButton::CreateNode("Split")
 Return
 
-V & LButton::CreateNode("Combine")
-Return
-
-; https://github.com/Cyanilux/ShaderGraphVariables
-G & LButton::CreateNode("GetVariable")
+~V & LButton::CreateNode("Combine")
 Return
 
 ; https://github.com/Cyanilux/ShaderGraphVariables
-R & LButton::CreateNode("RegisterVariable")
+~G & LButton::CreateNode("GetVariable")
 Return
 
-K & LButton::CreateNode("ChannelMask")
+; https://github.com/Cyanilux/ShaderGraphVariables
+~R & LButton::CreateNode("RegisterVariable")
 Return
 
-X & LButton::CreateNode("Cross")
+~K & LButton::CreateNode("ChannelMask")
 Return
 
-. & LButton::CreateNode("DotProduct")
+~X & LButton::CreateNode("Cross")
 Return
 
-L & LButton::CreateNode("Lerp")
+~. & LButton::CreateNode("DotProduct")
 Return
 
-N & LButton::CreateNode("Normalize")
+~L & LButton::CreateNode("Lerp")
 Return
 
-O & LButton::CreateNode("OneMinus")
+~N & LButton::CreateNode("Normalize")
 Return
 
-P & LButton::CreateNode("Power")
+~O & LButton::CreateNode("OneMinus")
 Return
 
-A & LButton::CreateNode("Add")
+~P & LButton::CreateNode("Power")
 Return
 
-D & LButton::CreateNode("Divide")
+~A & LButton::CreateNode("Add")
 Return
 
-M & LButton::CreateNode("Multiply")
+~D & LButton::CreateNode("Divide")
 Return
 
-S & LButton::CreateNode("Subtract")
+~M & LButton::CreateNode("Multiply")
 Return
 
-T & LButton::CreateNode("SampleTexture2D")
+~S & LButton::CreateNode("Subtract")
 Return
 
-U & LButton::CreateNode("TillingAndOffset")
+~T & LButton::CreateNode("SampleTexture2D")
+Return
+
+~U & LButton::CreateNode("TillingAndOffset")
 Return
 
 #IfWinActive
