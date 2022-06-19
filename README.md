@@ -5,6 +5,7 @@
 ## Features
 
 - Use right button to move canvas instead of right button.
+- [Shader Graph Variables](https://github.com/Cyanilux/ShaderGraphVariables) are supported
 
 ## Usage
 
@@ -13,3 +14,7 @@
 Open Shader Graph.
 
 run ShaderGraphHelper.exe
+
+### Known Issues :
+
+- The A, O and F keys can only be inputted when the mouse icon is I Beam.
