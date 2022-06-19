@@ -17,6 +17,8 @@
 
 4. Key + L Button to create node.
 
+5. (Optional) If you are also using [Shader Graph Variables](https://github.com/Cyanilux/ShaderGraphVariables), open Edit -> Shortcuts and search for sg and remove all shortcuts.
+
 ### Known Issues :
 
 - The A, O and F keys can only be inputted when the mouse icon is I Beam.
