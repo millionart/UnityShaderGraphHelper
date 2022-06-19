@@ -5,7 +5,8 @@
 ## Features
 
 - Use right button to move canvas instead of right button.
-- [Shader Graph Variables](https://github.com/Cyanilux/ShaderGraphVariables) are supported
+- Hold alt on edge with left click to remove it.
+- [Shader Graph Variables](https://github.com/Cyanilux/ShaderGraphVariables) are supported.
 
 ## Usage
 

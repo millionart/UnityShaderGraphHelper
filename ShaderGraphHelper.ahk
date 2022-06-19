@@ -77,7 +77,7 @@ $!LButton::
     {
         MouseGetPos, perPosX, perPosY
         Send, {LButton Down}
-        MouseMove, perPosX, perPosY+10,0
+        MouseMove, perPosX, perPosY+20,0
         MouseMove, perPosX, perPosY,0
         Send, {LButton Up}
         Sleep, 80
