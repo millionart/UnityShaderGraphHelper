@@ -1,0 +1,110 @@
+application/vnd.unity.graphview.elements {
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CopyPasteGraph",
+    "m_ObjectId": "56a8e65b95344fdba9f1386eb16ccf4d",
+    "m_Edges": [],
+    "m_Nodes": [
+        {
+            "m_Id": "2bb0cffdbc48417ab1ff75cd1bec2000"
+        }
+    ],
+    "m_Groups": [],
+    "m_StickyNotes": [],
+    "m_Inputs": [],
+    "m_Categories": [],
+    "m_MetaProperties": [],
+    "m_MetaPropertyIds": [],
+    "m_MetaKeywords": [],
+    "m_MetaKeywordIds": [],
+    "m_MetaDropdowns": [],
+    "m_MetaDropdownIds": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "20fdc6a1642e4a5398e8ace1e0db5095",
+    "m_Id": 1,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.OneMinusNode",
+    "m_ObjectId": "2bb0cffdbc48417ab1ff75cd1bec2000",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "One Minus",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -886.9999389648438,
+            "y": 1229.0,
+            "width": 128.0,
+            "height": 94.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "7b5a305769084fd58cbeb2e45c0aeb04"
+        },
+        {
+            "m_Id": "20fdc6a1642e4a5398e8ace1e0db5095"
+        }
+    ],
+    "synonyms": [
+        "complement",
+        "invert",
+        "opposite"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": false,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "7b5a305769084fd58cbeb2e45c0aeb04",
+    "m_Id": 0,
+    "m_DisplayName": "In",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "In",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0,
+        "w": 1.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+

@@ -10,7 +10,8 @@ SetBatchLines -1
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 DetectHiddenText, On
 
-ver:="0.1.0"
+ver:="0.2.0"
+nodesPath=%A_ScriptDir%\Nodes
 
 ; 托盘菜单
 If A_IsCompiled=1
@@ -68,10 +69,76 @@ RButton::
     }
 Return
 
+0 & LButton::CreateNode("Integer")
+Return
+
+1 & LButton::CreateNode("Float")
+Return
+
+2 & LButton::CreateNode("Vector2")
+Return
+
+3 & LButton::CreateNode("Vector3")
+Return
+
+4 & LButton::CreateNode("Vector4")
+Return
+
+5 & LButton::CreateNode("Color")
+Return
+
+B & LButton::CreateNode("Split")
+Return
+
+V & LButton::CreateNode("Combine")
+Return
+
 ; https://github.com/Cyanilux/ShaderGraphVariables
-; L & LButton::
-;     WinMenuSelectItem, A,, Tools, SGVariables, ExtraFeatures, Commands, Add Node 4
-; Return
+G & LButton::CreateNode("GetVariable")
+Return
+
+; https://github.com/Cyanilux/ShaderGraphVariables
+R & LButton::CreateNode("RegisterVariable")
+Return
+
+K & LButton::CreateNode("ChannelMask")
+Return
+
+X & LButton::CreateNode("Cross")
+Return
+
+. & LButton::CreateNode("DotProduct")
+Return
+
+L & LButton::CreateNode("Lerp")
+Return
+
+N & LButton::CreateNode("Normalize")
+Return
+
+O & LButton::CreateNode("OneMinus")
+Return
+
+P & LButton::CreateNode("Power")
+Return
+
+A & LButton::CreateNode("Add")
+Return
+
+D & LButton::CreateNode("Divide")
+Return
+
+M & LButton::CreateNode("Multiply")
+Return
+
+S & LButton::CreateNode("Subtract")
+Return
+
+T & LButton::CreateNode("SampleTexture2D")
+Return
+
+U & LButton::CreateNode("TillingAndOffset")
+Return
 
 #IfWinActive
 
@@ -124,3 +191,21 @@ BlockSend(key)
 ExitScrit:
 ExitApp
 Return
+
+CreateNode(nodeName)
+{
+    global nodesPath
+    clipSaved:=ClipBoardAll
+    FileRead, nodeclip, %nodesPath%\%nodeName%.txt
+    Clipboard:=nodeclip
+    ClipWait 0.2, 1
+    ; WinMenuSelectItem is lag, don't use it
+    ;;;;; WinMenuSelectItem, A,, Edit, Paste
+    Send, {CtrlDown}v
+    Sleep, 10
+    Send, {CtrlUp}
+    Sleep, 10
+    Clipboard:=clipSaved
+    ClipWait 0.1, 1
+    ; MsgBox, %nodesPath% | %fileName% | %nodeclip%
+}
