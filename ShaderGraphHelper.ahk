@@ -69,13 +69,13 @@ RButton::
     }
 Return
 
-~0 & LButton::CreateNode("Integer")
+0 & LButton::CreateNode("Integer")
 Return
 
-~1 & LButton::CreateNode("Float")
+1 & LButton::CreateNode("Float")
 Return
 
-~2 & LButton::CreateNode("Vector2")
+2 & LButton::CreateNode("Vector2")
 Return
 
 ~3 & LButton::CreateNode("Vector3")
