@@ -4,7 +4,7 @@
 
 ## Features
 
-- Use right button to move canvas instead of right button.
+- Use right button to move canvas instead of middle button.
 - Hold alt on edge with left click to remove it.
 - [Shader Graph Variables](https://github.com/Cyanilux/ShaderGraphVariables) are supported.
 
@@ -22,8 +22,7 @@
 
 ### Known Issues :
 
-- The A, O and F keys can only be inputted when the mouse icon is I Beam.
-- Ctrl 0 1 and 2 will not work.
+- The A, O and F keys can only be entered when the mouse icon is I Beam or when the mouse is located near the input state.
 
 ## Shortcut Keys：
 

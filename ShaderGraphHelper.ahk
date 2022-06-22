@@ -1,5 +1,6 @@
 ﻿#NoEnv ; Recommended for performance and compatibility with future AutoHotkey releases.
 #SingleInstance, force
+#InstallKeybdHook
 #InstallMouseHook
 AutoTrim, Off
 CoordMode, Mouse, Screen
@@ -10,7 +11,7 @@ SetBatchLines -1
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 DetectHiddenText, On
 
-ver:="0.2.0"
+ver:="0.3.0"
 nodesPath=%A_ScriptDir%\Nodes
 
 ; 托盘菜单
@@ -32,137 +33,79 @@ else
 }
 return
 
-UpdateScrit:
-    Run, https://github.com/millionart/UnityShaderGraphHelper/releases
-Return
-
 #IfWinActive, ahk_class UnityContainerWndClass
+
+    LButton::
+        TryGetAnyKey()
+    Return
 
     ; Block GraphView stupid Shourtcuts
 
     $a::BlockSend("a")
-Return
+    Return
 
-$o::BlockSend("o")
-Return
+    $o::BlockSend("o")
+    Return
 
-$f::BlockSend("f")
-Return
+    $f::BlockSend("f")
+    Return
 
-RButton::
-    if WinExist("A")
-        ControlGetFocus, curCtrl
+    RButton::
+        if WinExist("A")
+            ControlGetFocus, curCtrl
 
-    ControlGetText, ctrlTxt, %curCtrl%
-    if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
-    {
-        MouseGetPos, perPosX, perPosY
-        Send, {MButton Down}
-        KeyWait, RButton ,
-        HookRightMouse(perPosX,perPosY) 
-    }
-    Else
-    {
-        Send, {RButton Down}
-        KeyWait, RButton
-        Send, {RButton Up}
-    }
-Return
+        ControlGetText, ctrlTxt, %curCtrl%
+        if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
+        {
+            MouseGetPos, perPosX, perPosY
+            Send, {MButton Down}
+            KeyWait, RButton ,
+            HookRightMouse(perPosX,perPosY) 
+        }
+        Else
+        {
+            Send, {RButton Down}
+            KeyWait, RButton
+            Send, {RButton Up}
+        }
+    Return
 
-$!LButton::
-    if WinExist("A")
-        ControlGetFocus, curCtrl
-    ControlGetText, ctrlTxt, %curCtrl%
-    if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
-    {
-        MouseGetPos, perPosX, perPosY
-        Send, {LButton Down}
-        MouseMove, perPosX, perPosY+20,0
-        MouseMove, perPosX, perPosY,0
-        Send, {LButton Up}
-        Sleep, 80
-        Send, {Escape}
-    }
-    Else
-    {
-        Send, !{LButton Down}
-        KeyWait, LButton
-        Send, !{LButton Up}
-    }
-Return
+    $!LButton::
+        if WinExist("A")
+            ControlGetFocus, curCtrl
 
-0 & LButton::CreateNode("Integer")
-Return
-
-1 & LButton::CreateNode("Float")
-Return
-
-2 & LButton::CreateNode("Vector2")
-Return
-
-~3 & LButton::CreateNode("Vector3")
-Return
-
-~4 & LButton::CreateNode("Vector4")
-Return
-
-~5 & LButton::CreateNode("Color")
-Return
-
-~B & LButton::CreateNode("Split")
-Return
-
-~V & LButton::CreateNode("Combine")
-Return
-
-; https://github.com/Cyanilux/ShaderGraphVariables
-~G & LButton::CreateNode("GetVariable")
-Return
-
-; https://github.com/Cyanilux/ShaderGraphVariables
-~R & LButton::CreateNode("RegisterVariable")
-Return
-
-~K & LButton::CreateNode("ChannelMask")
-Return
-
-~X & LButton::CreateNode("Cross")
-Return
-
-~. & LButton::CreateNode("DotProduct")
-Return
-
-~L & LButton::CreateNode("Lerp")
-Return
-
-~N & LButton::CreateNode("Normalize")
-Return
-
-~O & LButton::CreateNode("OneMinus")
-Return
-
-~P & LButton::CreateNode("Power")
-Return
-
-~A & LButton::CreateNode("Add")
-Return
-
-~D & LButton::CreateNode("Divide")
-Return
-
-~M & LButton::CreateNode("Multiply")
-Return
-
-~S & LButton::CreateNode("Subtract")
-Return
-
-~T & LButton::CreateNode("SampleTexture2D")
-Return
-
-~U & LButton::CreateNode("TillingAndOffset")
-Return
+        ControlGetText, ctrlTxt, %curCtrl%
+        if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
+        {
+            MouseGetPos, perPosX, perPosY
+            Send, {LButton Down}
+            MouseMove, perPosX, perPosY+40,0
+            MouseMove, perPosX, perPosY,0
+            Send, {LButton Up}
+            Sleep, 100
+            Send, {Escape}
+        }
+        Else
+        {
+            Send, !{LButton Down}
+            KeyWait, LButton
+            Send, !{LButton Up}
+        }
+    Return
 
 #IfWinActive
+
+ExitScrit:
+ExitApp
+Return
+
+UpdateScrit:
+    Run, https://github.com/millionart/UnityShaderGraphHelper/releases
+Return
+
+RemoveToolTip:
+    ToolTip
+return
 
 HookRightMouse(perPosX,perPosY)
 {
@@ -173,7 +116,7 @@ HookRightMouse(perPosX,perPosY)
     moveX:=abs(curPosX-perPosX)
     moveY:=abs(curPosY-perPosY)
 
-    ; 如果X大于10，Y大于10, 在当前坐标弹出界面
+    ; 如果X大于10，Y大于10, 则认为是右键移动
     If (moveX>10) || (moveY>10)
     {
         Send, {MButton Up}
@@ -193,47 +136,114 @@ BlockSend(key)
     ControlGetText, ctrlTxt, %curCtrl%
     if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
     {
-        If (A_Cursor!="IBeam")
+        MouseGetPos, MouseX, MouseY
+        PixelGetColor, color, %MouseX%, %MouseY%
+
+        If (A_Cursor="IBeam" || (color!="0x202020" && color!="0x1F1F1F" && color!="0x393939" && color!="0xAEAEAE" && color!="0x4B92F3" && color!="0xCB3022" && color!="0xF6FF9A"))
         {
-            Return
+            while GetKeyState(key, "P")
+            {
+                Send, {%key%}
+                sleep, Max(400 - A_Index*100, 50)
+            }
         }
         else
         {
-            SendInput, %key%
+            global blockedKeyInput:=key
+            KeyWait, %key%
+            global blockedKeyInput:=""
+            Return
         }
     }
     else
     {
-        Send, {%key% Down}
-        KeyWait, %key%
-        Send, {%key% Up}
+        while GetKeyState(key, "P")
+        {
+            Send, {%key%}
+            sleep, Max(400 - A_Index*100, 50)
+        }
     }
 }
 
-ExitScrit:
-ExitApp
-Return
-
-CreateNode(nodeName)
+TryGetAnyKey()
 {
     if WinExist("A")
         ControlGetFocus, curCtrl
     ControlGetText, ctrlTxt, %curCtrl%
     if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
     {
-        global nodesPath
-        clipSaved:=ClipBoardAll
-        FileRead, nodeclip, %nodesPath%\%nodeName%.txt
-        Clipboard:=nodeclip
-        ClipWait 0.2, 1
-        ; WinMenuSelectItem is lag, don't use it
-        ;;;;; WinMenuSelectItem, A,, Edit, Paste
-        Send, {CtrlDown}v
-        Sleep, 10
-        Send, {CtrlUp}
-        Sleep, 10
-        Clipboard:=clipSaved
-        ClipWait 0.1, 1
-        ; MsgBox, %nodesPath% | %fileName% | %nodeclip%
+        global blockedKeyInput
+
+        InputHook :=A_PriorKey
+        ; InputHook := Format(Upper , %InputHook)
+        StringUpper, InputHook, InputHook
+        ; ToolTip, %InputHook%
+        If GetKeyState(A_PriorKey) || blockedKeyInput!=""
+        {
+            Switch blockedKeyInput
+            {
+                Case "a": InputHook:="A"
+                Case "o": InputHook:="O"
+                Case "f": InputHook:="F"
+            }
+
+            Switch InputHook
+            {
+                Case "0": CreateNode("Integer")
+                Case "1": CreateNode("Float")
+                Case "2": CreateNode("Vector2")
+                Case "3": CreateNode("Vector3")
+                Case "4": CreateNode("Vector4")
+                Case "5": CreateNode("Color")
+                Case "B": CreateNode("Split")
+                Case "V": CreateNode("Combine")
+                Case "G": CreateNode("GetVariable") ;  https://github.com/Cyanilux/ShaderGraphVariables
+                Case "R": CreateNode("RegisterVariable") ; https://github.com/Cyanilux/ShaderGraphVariables
+                Case "K": CreateNode("ChannelMask")
+                Case "X": CreateNode("Cross")
+                Case ".": CreateNode("DotProduct")
+                Case "L": CreateNode("Lerp")
+                Case "N": CreateNode("Normalize")
+                Case "O": CreateNode("OneMinus")
+                Case "E": CreateNode("Power")
+                Case "A": CreateNode("Add")
+                Case "D": CreateNode("Divide")
+                Case "M": CreateNode("Multiply")
+                Case "S": CreateNode("Subtract")
+                Case "T": CreateNode("SampleTexture2D")
+                Case "U": CreateNode("TillingAndOffset")
+                ; Default:
+                ;     ToolTip, %A_Time%
+                ;     SetTimer, RemoveToolTip, 1000
+            }
+        }
     }
+    Send, {LButton Down}
+    KeyWait, LButton
+    Send, {LButton Up}
+}
+
+CreateNode(nodeName)
+{
+    global nodesPath
+    clipSaved:=ClipBoardAll
+    FileRead, nodeclip, %nodesPath%\%nodeName%.txt
+    Clipboard:=nodeclip
+    ClipWait 0.1, 1
+    ; WinMenuSelectItem is lag, don't use it
+    ; WinMenuSelectItem, A,, Edit, Paste
+    ; https://www.the-automator.com/pasting-with-sendmessage-in-autohotkey/
+    ; Not work
+    ; ControlGetFocus, vCtlClassNN, A
+    ; ControlGet, hCtl, Hwnd,, % vCtlClassNN, A
+    ; SendMessage, 0x0302,,,, % “ahk_id ” hCtl ;WM_PASTE := 0x302
+
+    Send, {%key% Up}^{v}
+    Sleep, 10
+    Send, {Ctrl Up}
+    ; BlockInput Off
+    Sleep, 10
+    Clipboard:=clipSaved
+    ClipWait 0.1, 1
+    ; MsgBox, %nodesPath% | %fileName% | %nodeclip%
 }
