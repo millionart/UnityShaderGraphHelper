@@ -1,0 +1,75 @@
+application/vnd.unity.graphview.elements {
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CopyPasteGraph",
+    "m_ObjectId": "c71d1ab9c32643dfbd37a80b997dab2e",
+    "m_Edges": [],
+    "m_Nodes": [
+        {
+            "m_Id": "f73a635abec845e2ba254ddd67d9f3ec"
+        }
+    ],
+    "m_Groups": [],
+    "m_StickyNotes": [],
+    "m_Inputs": [],
+    "m_Categories": [],
+    "m_MetaProperties": [],
+    "m_MetaPropertyIds": [],
+    "m_MetaKeywords": [],
+    "m_MetaKeywordIds": [],
+    "m_MetaDropdowns": [],
+    "m_MetaDropdownIds": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "59a32f87551d4752bfbc0f0b83e487a7",
+    "m_Id": 0,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.SliderNode",
+    "m_ObjectId": "f73a635abec845e2ba254ddd67d9f3ec",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Slider",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -4765.0,
+            "y": 1454.0,
+            "width": 232.0,
+            "height": 146.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "59a32f87551d4752bfbc0f0b83e487a7"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 1.0
+    }
+}
+

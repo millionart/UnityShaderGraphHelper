@@ -2,6 +2,7 @@
 #SingleInstance, force
 #InstallKeybdHook
 #InstallMouseHook
+#EscapeChar \
 AutoTrim, Off
 CoordMode, Mouse, Screen
 DetectHiddenWindows, On
@@ -11,8 +12,9 @@ SetBatchLines -1
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 DetectHiddenText, On
 
+
 ver:="0.3.0"
-nodesPath=%A_ScriptDir%\Nodes
+nodesPath=%A_ScriptDir%\\Nodes
 
 ; 托盘菜单
 If A_IsCompiled=1
@@ -29,7 +31,7 @@ If A_IsCompiled=1
 }
 else
 {
-    Menu, Tray, Icon,%A_scriptdir%\tray.ico,, 1
+    Menu, Tray, Icon,%A_scriptdir%\\tray.ico,, 1
 }
 return
 
@@ -189,6 +191,7 @@ TryGetAnyKey()
 
             Switch InputHook
             {
+                Case "`": CreateNode("Slider")
                 Case "0": CreateNode("Integer")
                 Case "1": CreateNode("Float")
                 Case "2": CreateNode("Vector2")
@@ -227,7 +230,7 @@ CreateNode(nodeName)
 {
     global nodesPath
     clipSaved:=ClipBoardAll
-    FileRead, nodeclip, %nodesPath%\%nodeName%.txt
+    FileRead, nodeclip, %nodesPath%\\%nodeName%.txt
     Clipboard:=nodeclip
     ClipWait 0.1, 1
     ; WinMenuSelectItem is lag, don't use it
