@@ -61,7 +61,7 @@ return
         {
             MouseGetPos, perPosX, perPosY
             Send, {MButton Down}
-            KeyWait, RButton ,
+            KeyWait, RButton
             HookRightMouse(perPosX,perPosY) 
         }
         Else
@@ -156,6 +156,12 @@ BlockSend(key)
             global blockedKeyInput:=""
             Return
         }
+    }
+    else if ctrlTxt=UnityEditor.GameView
+    {
+        Send, {%key% Down}
+        KeyWait, %key%
+        Send, {%key% Up}
     }
     else
     {
