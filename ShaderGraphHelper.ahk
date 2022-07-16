@@ -12,8 +12,7 @@ SetBatchLines -1
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 DetectHiddenText, On
 
-
-ver:="0.3.0"
+ver:="0.3.1"
 nodesPath=%A_ScriptDir%\\Nodes
 
 ; 托盘菜单
@@ -73,19 +72,14 @@ return
     Return
 
     $!LButton::
+        Send, {Click}
         if WinExist("A")
             ControlGetFocus, curCtrl
 
         ControlGetText, ctrlTxt, %curCtrl%
         if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
         {
-            MouseGetPos, perPosX, perPosY
-            Send, {LButton Down}
-            MouseMove, perPosX, perPosY+40,0
-            MouseMove, perPosX, perPosY,0
-            Send, {LButton Up}
-            Sleep, 100
-            Send, {Escape}
+            Send, {Delete}
         }
         Else
         {
@@ -141,7 +135,7 @@ BlockSend(key)
         MouseGetPos, MouseX, MouseY
         PixelGetColor, color, %MouseX%, %MouseY%
 
-        If (A_Cursor="IBeam" || (color!="0x202020" && color!="0x1F1F1F" && color!="0x393939" && color!="0xAEAEAE" && color!="0x4B92F3" && color!="0xCB3022" && color!="0xF6FF9A"))
+        If (A_Cursor="IBeam" || color="0x2B2B2B" || color="0x2E2E2E")
         {
             while GetKeyState(key, "P")
             {
