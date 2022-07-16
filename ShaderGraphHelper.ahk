@@ -72,13 +72,12 @@ return
     Return
 
     $!LButton::
-        Send, {Click}
-        if WinExist("A")
-            ControlGetFocus, curCtrl
+        MouseGetPos, , , , curCtrl
 
         ControlGetText, ctrlTxt, %curCtrl%
         if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
         {
+            Send, {Click}
             Send, {Delete}
         }
         Else
@@ -126,12 +125,12 @@ HookRightMouse(perPosX,perPosY)
 
 BlockSend(key)
 {
-    if WinExist("A")
-        ControlGetFocus, curCtrl
+    MouseGetPos, , , , curCtrl
 
     ControlGetText, ctrlTxt, %curCtrl%
     if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
     {
+        CoordMode, Mouse, Client
         MouseGetPos, MouseX, MouseY
         PixelGetColor, color, %MouseX%, %MouseY%
 
@@ -169,8 +168,7 @@ BlockSend(key)
 
 TryGetAnyKey()
 {
-    if WinExist("A")
-        ControlGetFocus, curCtrl
+    MouseGetPos, , , , curCtrl
     ControlGetText, ctrlTxt, %curCtrl%
     if ctrlTxt=UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
     {
